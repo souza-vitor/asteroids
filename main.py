@@ -32,6 +32,7 @@ def main():
         pygame.Surface.fill(screen, color=(0,0,0))
         for item in drawable:
             item.draw(screen)
+        
 
         pygame.display.flip()
         dt = time_clock.tick(60) / 1000
@@ -40,6 +41,12 @@ def main():
             if asteroid.check_collision(player):
                 print("Game over!")
                 sys.exit()
+        
+        for asteroid in asteroids:
+            for shot in shots:
+                if shot.check_collision(asteroid):
+                    asteroid.split()
+                    shot.kill()
 
 if __name__ == "__main__":
     main()
